@@ -3,11 +3,11 @@ package com.example.finalprojectk.object;
 public class Product {
     private String productName;
     private Integer productRating;
-    private Double productPrice;
-    private Integer productImage;
+    private Integer productPrice;
+    private String productImage;
     private String productDescription;
 
-    public Product(String productName, Integer productRating, Double productPrice, Integer productImage, String productDescription) {
+    public Product(String productName, Integer productRating, Integer productPrice, String productImage, String productDescription) {
         this.productName = productName;
         this.productRating = productRating;
         this.productPrice = productPrice;
@@ -31,19 +31,19 @@ public class Product {
         this.productRating = productRating;
     }
 
-    public Double getProductPrice() {
+    public Integer getProductPrice() {
         return productPrice;
     }
 
-    public void setProductPrice(Double productPrice) {
+    public void setProductPrice(Integer productPrice) {
         this.productPrice = productPrice;
     }
 
-    public Integer getProductImage() {
+    public String getProductImage() {
         return productImage;
     }
 
-    public void setProductImage(Integer productImage) {
+    public void setProductImage(String productImage) {
         this.productImage = productImage;
     }
 

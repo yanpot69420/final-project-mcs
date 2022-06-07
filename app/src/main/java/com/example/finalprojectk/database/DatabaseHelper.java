@@ -6,10 +6,8 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
-import android.widget.Toast;
-
 import androidx.annotation.Nullable;
-import com.example.finalprojectk.LandingActivity;
+import com.example.finalprojectk.object.Product;
 import com.example.finalprojectk.object.Users;
 import java.util.ArrayList;
 
@@ -96,13 +94,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 returnList.add(users);
             } while (cursor.moveToNext());
         }
-        else {
-            // do nothing
-        }
         cursor.close();
         db.close();
         return  returnList;
+    }
 
-
+    public ArrayList<Product> getProductList(){
+        ArrayList<Product> returnList = new ArrayList<>();
+        String query = "select * from product";
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        if(cursor.moveToFirst()){
+            do {
+                String productName = cursor.getString(0);
+                int productRating = cursor.getInt(1);
+                int productPrice = cursor.getInt(2);
+                String productImage = cursor.getString(3);
+                String productDesc = cursor.getString(4);
+                Product product = new Product(productName, productRating, productPrice, productImage, productDesc);
+                returnList.add(product);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return returnList;
     }
 }

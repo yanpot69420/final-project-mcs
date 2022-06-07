@@ -1,5 +1,6 @@
 package com.example.finalprojectk.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -11,6 +12,7 @@ import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import com.example.finalprojectk.R;
+import com.example.finalprojectk.TempActivity;
 import com.google.android.material.textfield.TextInputLayout;
 
 
@@ -39,7 +41,8 @@ public class LoginFragment extends Fragment {
         btnLogin.setOnClickListener(v -> {
             resetError();
             initVar();
-            Boolean check = checkError(email, password);
+            Intent intent = new Intent(getActivity(), TempActivity.class);
+            startActivity(intent);
         });
 
     }
@@ -78,4 +81,8 @@ public class LoginFragment extends Fragment {
         }
         return temp;
     }
+
+//    private Boolean checkUserAccount(String email, String password){
+//        return true;
+//    }
 }
