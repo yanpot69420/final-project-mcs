@@ -9,4 +9,50 @@
     <string name="username">Username</string>
     <string name="sign_in">sign in</string>
     <string name="sign_up">sign up</string>
+    <string name="about">about</string>
+    <string name="history">history</string>
+    <string name="create_sql_table">CREATE TABLE `product` (
+  `ProductName` varchar(30) NOT NULL,
+  `ProductRating` int(11) NOT NULL,
+  `ProductPrice` double NOT NULL,
+  `ProductImage` varchar(255) NOT NULL,
+  `ProductDescription` varchar(255) NOT NULL
+
+);
+CREATE TABLE `transaction` (
+  `TransactionID` int(11) NOT NULL,
+  `UserID` int(11) NOT NULL,
+  `ProductName` varchar(30) NOT NULL,
+  `TransactionDate` date NOT NULL,
+  `Quantity` int(11) NOT NULL
+);
+
+CREATE TABLE `users` (
+  `UserID` int(11) NOT NULL,
+  `UserEmailAddress` varchar(30) NOT NULL,
+  `UserUsername` varchar(20) NOT NULL,
+  `UserPhone` int(11) NOT NULL,
+  `UserPassword` varchar(30) NOT NULL
+);
+
+ALTER TABLE `product`
+  ADD PRIMARY KEY (`ProductName`);
+
+ALTER TABLE `users`
+  ADD PRIMARY KEY (`UserID`);
+
+ALTER TABLE `transaction`
+  ADD PRIMARY KEY (`TransactionID`),
+  ADD KEY `UserID` (`UserID`),
+  ADD KEY `ProductName` (`ProductName`);
+
+ALTER TABLE `transaction`
+  MODIFY `TransactionID` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `users`
+  MODIFY `UserID` int(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `transaction`
+  ADD CONSTRAINT `transaction_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `users` (`UserID`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `transaction_ibfk_2` FOREIGN KEY (`ProductName`) REFERENCES `product` (`ProductName`) ON DELETE CASCADE ON UPDATE CASCADE;</string>
 </resources>

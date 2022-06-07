@@ -3,6 +3,7 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/62821/AndroidStudioProjects/final projectx/app/src/main/res/drawable/ic_about.xml" value="0.215" />
         <entry key="..\:/Users/62821/AndroidStudioProjects/final projectx/app/src/main/res/font/fxasdasdasd.xml" value="0.24479166666666666" />
         <entry key="..\:/Users/62821/AndroidStudioProjects/final projectx/app/src/main/res/layout/activity_home.xml" value="0.23229166666666667" />
         <entry key="..\:/Users/62821/AndroidStudioProjects/final projectx/app/src/main/res/layout/activity_landing.xml" value="0.2351851851851852" />
@@ -10,6 +11,7 @@
         <entry key="..\:/Users/62821/AndroidStudioProjects/final projectx/app/src/main/res/layout/activity_splash_screen.xml" value="0.23229166666666667" />
         <entry key="..\:/Users/62821/AndroidStudioProjects/final projectx/app/src/main/res/layout/fragment_login.xml" value="0.34479166666666666" />
         <entry key="..\:/Users/62821/AndroidStudioProjects/final projectx/app/src/main/res/layout/fragment_register.xml" value="0.21776315789473685" />
+        <entry key="..\:/Users/62821/AndroidStudioProjects/final projectx/app/src/main/res/menu/home_menu.xml" value="0.34479166666666666" />
       </map>
     </option>
   </component>
