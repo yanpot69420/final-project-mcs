@@ -19,7 +19,8 @@ import com.google.android.material.textfield.TextInputLayout;
 public class LoginFragment extends Fragment {
     EditText logEmail, logPassword;
     Button btnLogin;
-    TextInputLayout logEmailLayout, logPasswordLayout;
+    String email, password;
+    TextInputLayout emailLayout, passwordLayout;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -35,28 +36,47 @@ public class LoginFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        logEmail = view.findViewById(R.id.inputEmailLog);
-        logPassword = view.findViewById(R.id.inputPassword);
-        btnLogin = view.findViewById(R.id.btnLogin);
-        logEmailLayout = view.findViewById(R.id.etEmailLog);
-        logPasswordLayout = view.findViewById(R.id.etPasswordLog);
-        String email = logEmail.getText().toString();
-        String password = logEmail.getText().toString();
+        initView(view);
+
         btnLogin.setOnClickListener(v -> {
-            checkInput(email, password);
+            resetError();
+            initVar();
+            Boolean check = checkError(email, password);
         });
 
     }
 
-    Boolean checkInput(String name, String password){
+    private void initVar() {
+        email = logEmail.getText().toString();
+        password = logPassword.getText().toString();
+    }
+
+    private void initView(@NonNull View view) {
+        logEmail = view.findViewById(R.id.inputEmailLog);
+        logPassword = view.findViewById(R.id.inputPasswordLog);
+        btnLogin = view.findViewById(R.id.btnLogin);
+        emailLayout = view.findViewById(R.id.etEmailLog);
+        passwordLayout = view.findViewById(R.id.etPasswordLog);
+    }
+
+    private void resetError(){
+        emailLayout.setError(null);
+        passwordLayout.setError(null);
+    }
+
+    private Boolean checkError(String email, String password){
         boolean temp = true;
-        if(name.length()==0){
+        if(!email.endsWith(".com")){
             temp = false;
-            logEmailLayout.setError("Field cannot be empty!");
+            emailLayout.setError("Email must ends with '.com'");
+        }
+        if(email.length()==0){
+            emailLayout.setError("Field cannot be empty!");
+            temp = false;
         }
         if(password.length()==0){
             temp = false;
-            logPasswordLayout.setError("Field cannot be empty!");
+            passwordLayout.setError("Field cannot be empty!");
         }
         return temp;
     }

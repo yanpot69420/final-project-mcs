@@ -33,6 +33,16 @@ public class RegisterFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        initView(view);
+        btnRegister.setOnClickListener(v -> {
+            resetError();
+            initVar();
+            Boolean check = checkError(email, username, phone, password);
+
+        });
+    }
+
+    private void initView(@NonNull View view){
         regEmail = view.findViewById(R.id.inputEmail);
         regUsername = view.findViewById(R.id.inputUsername);
         regPhone = view.findViewById(R.id.inputPhone);
@@ -42,24 +52,30 @@ public class RegisterFragment extends Fragment {
         usernameLayout = view.findViewById(R.id.etUsername);
         phoneLayout = view.findViewById(R.id.etPhone);
         passwordLayout = view.findViewById(R.id.etPassword);
+    }
+
+    private void initVar() {
         email = regEmail.getText().toString();
         username = regUsername.getText().toString();
         phone = regPhone.getText().toString();
         password = regPassword.getText().toString();
-        btnRegister.setOnClickListener(v -> {
-            checkInput(email, username, phone, password);
-        });
-
-
-
     }
 
-    boolean checkInput(String email, String username, String phone, String password){
+    private boolean checkError(String email, String username, String phone, String password){
         boolean temp = true;
+        if(!email.endsWith(".com")){
+            temp = false;
+            emailLayout.setError("Email must ends with '.com'");
+        }
         if(email.length()==0){
             temp = false;
             emailLayout.setError("Field cannot be empty");
         }
+        if(username.length()<3 || username.length()>20){
+            temp = false;
+            usernameLayout.setError("Username must be between 3-20 characters");
+        }
+
         if(username.length()==0){
             temp = false;
             usernameLayout.setError("Field cannot be empty!");
@@ -73,6 +89,13 @@ public class RegisterFragment extends Fragment {
             passwordLayout.setError("Field cannot be empty!");
         }
         return temp;
+    }
+
+    private void resetError(){
+        emailLayout.setError(null);
+        usernameLayout.setError(null);
+        phoneLayout.setError(null);
+        passwordLayout.setError(null);
     }
 
 }
