@@ -14,12 +14,13 @@ public class LandingActivity extends AppCompatActivity {
     FragmentAdapter fragmentAdapter;
     public static DatabaseHelper dh;
     public static String query;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_landing);
+        query = getString(R.string.create_table);
         dh = new DatabaseHelper(this);
-        query = getString(R.string.create_sql_table);
         initView();
         configFragment();
     }

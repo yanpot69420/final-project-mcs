@@ -11,7 +11,8 @@
     <string name="sign_up">sign up</string>
     <string name="about">about</string>
     <string name="history">history</string>
-    <string name="create_sql_table">CREATE TABLE `product` (
+    <string name="create_table">
+        CREATE TABLE `product` (
   `ProductName` varchar(30) NOT NULL,
   `ProductRating` int(11) NOT NULL,
   `ProductPrice` double NOT NULL,
@@ -54,5 +55,8 @@ ALTER TABLE `users`
 
 ALTER TABLE `transaction`
   ADD CONSTRAINT `transaction_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `users` (`UserID`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `transaction_ibfk_2` FOREIGN KEY (`ProductName`) REFERENCES `product` (`ProductName`) ON DELETE CASCADE ON UPDATE CASCADE;</string>
+  ADD CONSTRAINT `transaction_ibfk_2` FOREIGN KEY (`ProductName`) REFERENCES `product` (`ProductName`) ON DELETE CASCADE ON UPDATE CASCADE;
+    </string>
+
+
 </resources>

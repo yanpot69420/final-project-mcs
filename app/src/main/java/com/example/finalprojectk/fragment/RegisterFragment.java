@@ -10,7 +10,12 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
+import com.example.finalprojectk.LandingActivity;
 import com.example.finalprojectk.R;
+import com.example.finalprojectk.database.DatabaseHelper;
+import com.example.finalprojectk.object.Users;
 import com.google.android.material.textfield.TextInputLayout;
 
 
@@ -38,6 +43,18 @@ public class RegisterFragment extends Fragment {
             resetError();
             initVar();
             Boolean check = checkError(email, username, phone, password);
+            if(check){
+                Users user = new Users(null,email, username, phone, password);
+                LandingActivity.dh = new DatabaseHelper(getActivity());
+                if(user!=null){
+                    boolean insertdb = LandingActivity.dh.addUser(user);
+                    Toast.makeText(getActivity(), "Success coy " + user.getUserEmail(), Toast.LENGTH_SHORT).show();
+                }
+
+            }
+            else {
+                Toast.makeText(getActivity(), "Error!", Toast.LENGTH_SHORT).show();
+            }
 
         });
     }
