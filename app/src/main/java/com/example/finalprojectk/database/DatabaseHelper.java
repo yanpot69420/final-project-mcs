@@ -5,11 +5,12 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import androidx.annotation.Nullable;
+import android.util.Log;
+import android.widget.Toast;
 
+import androidx.annotation.Nullable;
 import com.example.finalprojectk.LandingActivity;
 import com.example.finalprojectk.object.Users;
-
 import java.util.ArrayList;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -18,12 +19,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
 
     @Override
-    public void onCreate(SQLiteDatabase sqLiteDatabase) {
+    public void onCreate(SQLiteDatabase db) {
         String create_users = "CREATE TABLE \"users\" (\n" +
                 "\t\"UserID\" integer primary key autoincrement,\n" +
                 "\t\"UserEmailAddress\" varchar not null\t,\n" +
                 "\t\"UserUsername\" varchar not null , \n" +
-                "\t\"UserUserPhoneNumber\" varchar not null,\n" +
+                "\t\"UserPhoneNumber\" varchar not null,\n" +
                 "\t\"UserPassword\" varchar not null\n" +
                 ");";
         String create_products = "CREATE TABLE \"product\" (\n" +
@@ -49,25 +50,33 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "\ton update cascade\n" +
                 "\ton delete cascade\n" +
                 ");";
-        sqLiteDatabase.execSQL(create_users);
-        sqLiteDatabase.execSQL(create_products);
-        sqLiteDatabase.execSQL(create_transaction);
+        db.execSQL(create_users);
+        db.execSQL(create_products);
+        db.execSQL(create_transaction);
     }
 
     @Override
-    public void onUpgrade(SQLiteDatabase sqLiteDatabase, int i, int i1) {
-
+    public void onUpgrade(SQLiteDatabase db, int i, int i1) {
+        String drop_table = "drop table if exists users";
+        String drop_table_2 = "drop table if exists product";
+        String drop_table_3 = "drop table if exists history";
+        db.execSQL(drop_table);
+        db.execSQL(drop_table_2);
+        db.execSQL(drop_table_3);
     }
 
-    public boolean addUser(Users user) {
+    public Boolean addUser(Users user) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
-        cv.put("UserEmailAddress", user.getUserEmail());
-        cv.put("UserUsername", user.getUserUsername());
-        cv.put("UserPhone", user.getUserPhoneNumber());
-        cv.put("UserPassword", user.getUserPassword());
-        long insert = db.insert("Users", null, cv);
-        if(insert==-1) return false;
+        cv.put("useremailaddress", user.getUserEmail());
+        cv.put("userusername", user.getUserUsername());
+        cv.put("userphonenumber", user.getUserPhoneNumber());
+        cv.put("userpassword", user.getUserPassword());
+        Log.wtf("uservalue", "username : "+ user.getUserUsername());
+        Log.wtf("uservalue", "useremail : "+ user.getUserEmail());
+        Log.wtf("uservalue", "userphone : "+ user.getUserPhoneNumber());
+        long insert = db.insert("users", null, cv);
+        if(insert == -1) return false;
         else return true;
     }
 

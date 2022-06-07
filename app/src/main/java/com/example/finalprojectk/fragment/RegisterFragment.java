@@ -26,6 +26,7 @@ public class RegisterFragment extends Fragment {
     Button btnRegister;
     String email, username, phone, password;
     TextInputLayout emailLayout, usernameLayout, phoneLayout, passwordLayout;
+    DatabaseHelper dhRegister;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,18 +42,24 @@ public class RegisterFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         initView(view);
+        dhRegister = new DatabaseHelper(getActivity());
         btnRegister.setOnClickListener(v -> {
             resetError();
             initVar();
             Boolean check = checkError(email, username, phone, password);
             if(check){
-                Users user = new Users(null,email, username, phone, password);
-                LandingActivity.dh = new DatabaseHelper(getActivity());
+                Users user = new Users(-1,email, username, phone, password);
                 if(user!=null){
-                    boolean insertdb = LandingActivity.dh.addUser(user);
-                    Toast.makeText(getActivity(), "Success coy " + user.getUserEmail(), Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(getActivity(), TempActivity.class);
-                    startActivity(intent);
+                    boolean checkInsert = dhRegister.addUser(user);
+                    if(checkInsert){
+                        Toast.makeText(getActivity(), "Success coy " + user.getUserEmail() + " "+ user.getUserUsername() + " "+ user.getUserPhoneNumber()+ " "+ user.getUserPassword(), Toast.LENGTH_SHORT).show();
+                        Intent intent = new Intent(getActivity(), TempActivity.class);
+                        startActivity(intent);
+                    }
+                    else {
+                        Toast.makeText(getActivity(), "Error coy " + user.getUserEmail() + " "+ user.getUserUsername() + " "+ user.getUserPhoneNumber()+ " "+ user.getUserPassword(), Toast.LENGTH_SHORT).show();
+                    }
+
                 }
 
             }
