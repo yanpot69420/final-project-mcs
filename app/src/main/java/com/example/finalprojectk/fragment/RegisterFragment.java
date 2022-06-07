@@ -6,16 +6,16 @@ import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
-
-import com.example.finalprojectk.LandingActivity;
 import com.example.finalprojectk.R;
-import com.example.finalprojectk.TempActivity;
 import com.example.finalprojectk.database.DatabaseHelper;
 import com.example.finalprojectk.object.Users;
 import com.google.android.material.textfield.TextInputLayout;
@@ -26,6 +26,7 @@ public class RegisterFragment extends Fragment {
     Button btnRegister;
     String email, username, phone, password;
     TextInputLayout emailLayout, usernameLayout, phoneLayout, passwordLayout;
+    FragmentTransaction fr;
     DatabaseHelper dhRegister;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -51,23 +52,25 @@ public class RegisterFragment extends Fragment {
                 Users user = new Users(-1,email, username, phone, password);
                 if(user!=null){
                     boolean checkInsert = dhRegister.addUser(user);
-                    if(checkInsert){
-                        Toast.makeText(getActivity(), "Success coy " + user.getUserEmail() + " "+ user.getUserUsername() + " "+ user.getUserPhoneNumber()+ " "+ user.getUserPassword(), Toast.LENGTH_SHORT).show();
-                        Intent intent = new Intent(getActivity(), TempActivity.class);
-                        startActivity(intent);
-                    }
+                    if(!checkInsert)
+                        Toast.makeText(getActivity(), "Attempt Failed!", Toast.LENGTH_SHORT).show();
                     else {
-                        Toast.makeText(getActivity(), "Error coy " + user.getUserEmail() + " "+ user.getUserUsername() + " "+ user.getUserPhoneNumber()+ " "+ user.getUserPassword(), Toast.LENGTH_SHORT).show();
+                        emptyEditText();
+                        Toast.makeText(getActivity(), "Your account has been created!", Toast.LENGTH_SHORT).show();
                     }
-
                 }
-
             }
             else {
                 Toast.makeText(getActivity(), "Error!", Toast.LENGTH_SHORT).show();
             }
-
         });
+    }
+
+    private void emptyEditText() {
+        regUsername.setText("");
+        regEmail.setText("");
+        regPhone.setText("");
+        regPassword.setText("");
     }
 
     private void initView(@NonNull View view){
