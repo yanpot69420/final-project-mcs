@@ -5,7 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
 import androidx.annotation.Nullable;
 import com.example.finalprojectk.object.Product;
 import com.example.finalprojectk.object.Users;
@@ -70,9 +69,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cv.put("userusername", user.getUserUsername());
         cv.put("userphonenumber", user.getUserPhoneNumber());
         cv.put("userpassword", user.getUserPassword());
-        Log.wtf("uservalue", "username : "+ user.getUserUsername());
-        Log.wtf("uservalue", "useremail : "+ user.getUserEmail());
-        Log.wtf("uservalue", "userphone : "+ user.getUserPhoneNumber());
         long insert = db.insert("users", null, cv);
         if(insert == -1) return false;
         else return true;

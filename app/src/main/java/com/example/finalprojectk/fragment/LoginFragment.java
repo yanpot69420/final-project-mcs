@@ -11,9 +11,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.example.finalprojectk.HomeActivity;
 import com.example.finalprojectk.R;
-import com.example.finalprojectk.TempActivity;
+import com.example.finalprojectk.database.Database;
+import com.example.finalprojectk.object.Users;
 import com.google.android.material.textfield.TextInputLayout;
+
+import java.util.ArrayList;
 
 
 public class LoginFragment extends Fragment {
@@ -41,8 +46,15 @@ public class LoginFragment extends Fragment {
         btnLogin.setOnClickListener(v -> {
             resetError();
             initVar();
-            Intent intent = new Intent(getActivity(), TempActivity.class);
-            startActivity(intent);
+            Boolean check = checkError(email, password);
+            if(check){
+                Boolean checkUser = checkUserAccount(email, password);
+                if(checkUser){
+                    Intent intent = new Intent(getActivity(), HomeActivity.class);
+                    startActivity(intent);
+                    getActivity().finish();
+                }
+            }
         });
 
     }
@@ -72,8 +84,8 @@ public class LoginFragment extends Fragment {
             emailLayout.setError("Email must ends with '.com'");
         }
         if(email.length()==0){
-            emailLayout.setError("Field cannot be empty!");
             temp = false;
+            emailLayout.setError("Field cannot be empty!");
         }
         if(password.length()==0){
             temp = false;
@@ -82,7 +94,24 @@ public class LoginFragment extends Fragment {
         return temp;
     }
 
-//    private Boolean checkUserAccount(String email, String password){
-//        return true;
-//    }
+    private Boolean checkUserAccount(String email, String password){
+        ArrayList<Users> userList = Database.getUserData(getActivity());
+        for (int i=0;i<userList.size();i++) {
+            if(userList.get(i).getUserEmail().equals(email)){
+                if(userList.get(i).getUserPassword().equals(password)){
+                    Intent intent = new Intent(getActivity(), HomeActivity.class);
+                    startActivity(intent);
+                    getActivity().finish();
+                    return true;
+                }
+                else {
+                    passwordLayout.setError("Password is incorrect!");
+                    return false;
+                }
+            }
+        }
+        emailLayout.setError("Your email is not registered!");
+        return false;
+    }
+
 }
