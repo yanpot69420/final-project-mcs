@@ -11,13 +11,11 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-
-import com.example.finalprojectk.HomeActivity;
 import com.example.finalprojectk.R;
+import com.example.finalprojectk.TempActivity;
 import com.example.finalprojectk.database.Database;
 import com.example.finalprojectk.object.Users;
 import com.google.android.material.textfield.TextInputLayout;
-
 import java.util.ArrayList;
 
 
@@ -50,9 +48,9 @@ public class LoginFragment extends Fragment {
             if(check){
                 Boolean checkUser = checkUserAccount(email, password);
                 if(checkUser){
-                    Intent intent = new Intent(getActivity(), HomeActivity.class);
+                    Intent intent = new Intent(getActivity(), TempActivity.class);
                     startActivity(intent);
-                    getActivity().finish();
+                    requireActivity().finish();
                 }
             }
         });
@@ -99,9 +97,6 @@ public class LoginFragment extends Fragment {
         for (int i=0;i<userList.size();i++) {
             if(userList.get(i).getUserEmail().equals(email)){
                 if(userList.get(i).getUserPassword().equals(password)){
-                    Intent intent = new Intent(getActivity(), HomeActivity.class);
-                    startActivity(intent);
-                    getActivity().finish();
                     return true;
                 }
                 else {
