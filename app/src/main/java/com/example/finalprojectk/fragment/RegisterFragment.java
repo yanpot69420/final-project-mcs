@@ -1,5 +1,6 @@
 package com.example.finalprojectk.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -14,6 +15,7 @@ import android.widget.Toast;
 
 import com.example.finalprojectk.LandingActivity;
 import com.example.finalprojectk.R;
+import com.example.finalprojectk.TempActivity;
 import com.example.finalprojectk.database.DatabaseHelper;
 import com.example.finalprojectk.object.Users;
 import com.google.android.material.textfield.TextInputLayout;
@@ -49,6 +51,8 @@ public class RegisterFragment extends Fragment {
                 if(user!=null){
                     boolean insertdb = LandingActivity.dh.addUser(user);
                     Toast.makeText(getActivity(), "Success coy " + user.getUserEmail(), Toast.LENGTH_SHORT).show();
+                    Intent intent = new Intent(getActivity(), TempActivity.class);
+                    startActivity(intent);
                 }
 
             }
