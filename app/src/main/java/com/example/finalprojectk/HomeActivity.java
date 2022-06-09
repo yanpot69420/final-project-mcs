@@ -50,7 +50,6 @@ public class HomeActivity extends AppCompatActivity {
                         products.add(new Product(pName, pRating, pPrice, pImage, pDescription));
                     }
                     configRV();
-
                 } catch (JSONException e){
                     e.printStackTrace();
                 }
@@ -61,12 +60,7 @@ public class HomeActivity extends AppCompatActivity {
                 Log.wtf("error response", error.toString());
             }
         });
-
         requestQueue.add(jor);
-
-
-
-
     }
 
     void initView() {
@@ -75,7 +69,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     void configRV(){
-        ProductAdapter rvAdapter = new ProductAdapter(products);
+        ProductAdapter rvAdapter = new ProductAdapter(products, this);
         productList.setAdapter(rvAdapter);
         productList.setLayoutManager(new LinearLayoutManager(this));
     }

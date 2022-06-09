@@ -1,5 +1,6 @@
 package com.example.finalprojectk.adapter;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +11,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.finalprojectk.R;
 import com.example.finalprojectk.object.Product;
 
@@ -18,9 +20,11 @@ import java.util.ArrayList;
 
 public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHolder> {
     ArrayList<Product> productList;
+    Context context;
 
-    public ProductAdapter(ArrayList<Product> productList) {
+    public ProductAdapter(ArrayList<Product> productList, Context context) {
         this.productList = productList;
+        this.context = context;
     }
 
     @NonNull
@@ -40,6 +44,10 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         holder.pName.setText(name);
         holder.pPrice.setText(String.valueOf(price));
         holder.pRating.setRating(rating);
+        Glide.with(context).load(productList.get(position).getProductImage()).into(holder.pImage);
+        holder.itemView.setOnClickListener(v -> {
+
+        });
     }
 
     @Override
