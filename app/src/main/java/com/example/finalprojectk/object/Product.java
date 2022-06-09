@@ -2,12 +2,12 @@ package com.example.finalprojectk.object;
 
 public class Product {
     private String productName;
-    private Integer productRating;
+    private Float productRating;
     private Integer productPrice;
     private String productImage;
     private String productDescription;
 
-    public Product(String productName, Integer productRating, Integer productPrice, String productImage, String productDescription) {
+    public Product(String productName, Float productRating, Integer productPrice, String productImage, String productDescription) {
         this.productName = productName;
         this.productRating = productRating;
         this.productPrice = productPrice;
@@ -23,11 +23,11 @@ public class Product {
         this.productName = productName;
     }
 
-    public Integer getProductRating() {
+    public Float getProductRating() {
         return productRating;
     }
 
-    public void setProductRating(Integer productRating) {
+    public void setProductRating(Float productRating) {
         this.productRating = productRating;
     }
 

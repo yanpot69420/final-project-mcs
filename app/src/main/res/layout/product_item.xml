@@ -35,7 +35,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginVertical="5dp"
-            android:stepSize="1"/>
+            android:stepSize=".5"/>
 
         <TextView
             android:id="@+id/pPrice"

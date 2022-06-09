@@ -94,25 +94,4 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
         return  returnList;
     }
-
-    public ArrayList<Product> getProductList(){
-        ArrayList<Product> returnList = new ArrayList<>();
-        String query = "select * from product";
-        SQLiteDatabase db = this.getReadableDatabase();
-        Cursor cursor = db.rawQuery(query, null);
-        if(cursor.moveToFirst()){
-            do {
-                String productName = cursor.getString(0);
-                int productRating = cursor.getInt(1);
-                int productPrice = cursor.getInt(2);
-                String productImage = cursor.getString(3);
-                String productDesc = cursor.getString(4);
-                Product product = new Product(productName, productRating, productPrice, productImage, productDesc);
-                returnList.add(product);
-            } while (cursor.moveToNext());
-        }
-        cursor.close();
-        db.close();
-        return returnList;
-    }
 }
