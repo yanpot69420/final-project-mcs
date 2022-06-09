@@ -57,6 +57,9 @@ ALTER TABLE `transaction`
   ADD CONSTRAINT `transaction_ibfk_1` FOREIGN KEY (`UserID`) REFERENCES `users` (`UserID`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `transaction_ibfk_2` FOREIGN KEY (`ProductName`) REFERENCES `product` (`ProductName`) ON DELETE CASCADE ON UPDATE CASCADE;
     </string>
+    <string name="name">Name</string>
+    <string name="price">price</string>
+    <string name="furniture_list">Furniture List</string>
 
 
 </resources>

@@ -11,8 +11,9 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+
+import com.example.finalprojectk.HomeActivity;
 import com.example.finalprojectk.R;
-import com.example.finalprojectk.TempActivity;
 import com.example.finalprojectk.database.Database;
 import com.example.finalprojectk.object.Users;
 import com.google.android.material.textfield.TextInputLayout;
@@ -48,7 +49,7 @@ public class LoginFragment extends Fragment {
             if(check){
                 Boolean checkUser = checkUserAccount(email, password);
                 if(checkUser){
-                    Intent intent = new Intent(getActivity(), TempActivity.class);
+                    Intent intent = new Intent(getActivity(), HomeActivity.class);
                     startActivity(intent);
                     requireActivity().finish();
                 }

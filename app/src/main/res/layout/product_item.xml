@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="horizontal"
+    android:paddingHorizontal="30dp"
+    android:paddingVertical="15dp">
+
+    <com.makeramen.roundedimageview.RoundedImageView
+        android:id="@+id/pImage"
+        android:layout_width="80dp"
+        android:layout_height="80dp"
+        tools:src="@tools:sample/avatars"
+        app:riv_corner_radius="20dip"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_marginVertical="2dp"
+        android:layout_marginStart="20dp">
+
+        <TextView
+            android:id="@+id/pName"
+            android:textSize="20sp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/name"/>
+
+        <RatingBar
+            android:id="@+id/pRating"
+            style="@style/Widget.AppCompat.RatingBar.Small"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="5dp"
+            android:stepSize="1"/>
+
+        <TextView
+            android:id="@+id/pPrice"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/price"
+            android:textSize="14sp"/>
+
+
+
+
+    </LinearLayout>
+
+
+
+</LinearLayout>
