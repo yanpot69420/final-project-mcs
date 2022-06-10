@@ -60,6 +60,12 @@ ALTER TABLE `transaction`
     <string name="name">Name</string>
     <string name="price">price</string>
     <string name="furniture_list">Furniture List</string>
+    <string name="buy">buy</string>
+    <string name="plus">+</string>
+    <string name="_0">0</string>
+    <string name="minus">-</string>
+    <string name="product_name">Product Name</string>
+    <string name="product_price">Product Price</string>
 
 
 </resources>

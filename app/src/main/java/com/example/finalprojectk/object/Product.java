@@ -1,10 +1,9 @@
 package com.example.finalprojectk.object;
 
-import android.os.Parcelable;
 
-import java.util.ArrayList;
+import java.io.Serializable;
 
-public class Product extends ArrayList<Parcelable> {
+public class Product implements Serializable {
     private String productName;
     private Float productRating;
     private Integer productPrice;

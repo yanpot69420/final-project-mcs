@@ -2,12 +2,14 @@ package com.example.finalprojectk.adapter;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -49,7 +51,9 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         Glide.with(context).load(productList.get(position).getProductImage()).into(holder.pImage);
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, DetailActivity.class);
-            intent.putParcelableArrayListExtra("detail", productList.get(position));
+            Product detail = productList.get(position);
+            intent.putExtra("detail",detail);
+            context.startActivity(intent);
         });
     }
 
