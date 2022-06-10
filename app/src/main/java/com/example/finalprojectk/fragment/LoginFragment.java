@@ -11,6 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.FrameLayout;
 
 import com.example.finalprojectk.HomeActivity;
 import com.example.finalprojectk.R;
@@ -25,6 +26,7 @@ public class LoginFragment extends Fragment {
     Button btnLogin;
     String email, password;
     TextInputLayout emailLayout, passwordLayout;
+    FrameLayout contentLogin;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);

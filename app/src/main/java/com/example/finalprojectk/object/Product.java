@@ -1,6 +1,10 @@
 package com.example.finalprojectk.object;
 
-public class Product {
+import android.os.Parcelable;
+
+import java.util.ArrayList;
+
+public class Product extends ArrayList<Parcelable> {
     private String productName;
     private Float productRating;
     private Integer productPrice;
@@ -18,40 +22,18 @@ public class Product {
     public String getProductName() {
         return productName;
     }
-
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
     public Float getProductRating() {
         return productRating;
     }
-
-    public void setProductRating(Float productRating) {
-        this.productRating = productRating;
-    }
-
     public Integer getProductPrice() {
         return productPrice;
     }
-
-    public void setProductPrice(Integer productPrice) {
-        this.productPrice = productPrice;
-    }
-
     public String getProductImage() {
         return productImage;
     }
-
-    public void setProductImage(String productImage) {
-        this.productImage = productImage;
-    }
-
     public String getProductDescription() {
         return productDescription;
     }
 
-    public void setProductDescription(String productDescription) {
-        this.productDescription = productDescription;
-    }
+
 }

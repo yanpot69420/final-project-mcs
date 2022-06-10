@@ -1,6 +1,7 @@
 package com.example.finalprojectk.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -12,6 +13,7 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.finalprojectk.DetailActivity;
 import com.example.finalprojectk.R;
 import com.example.finalprojectk.object.Product;
 
@@ -42,11 +44,12 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         Float rating = productList.get(position).getProductRating();
 
         holder.pName.setText(name);
-        holder.pPrice.setText(String.valueOf(price));
+        holder.pPrice.setText("Price : $"+String.valueOf(price));
         holder.pRating.setRating(rating);
         Glide.with(context).load(productList.get(position).getProductImage()).into(holder.pImage);
         holder.itemView.setOnClickListener(v -> {
-
+            Intent intent = new Intent(context, DetailActivity.class);
+            intent.putParcelableArrayListExtra("detail", productList.get(position));
         });
     }
 
