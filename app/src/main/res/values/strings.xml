@@ -67,6 +67,9 @@ ALTER TABLE `transaction`
     <string name="product_name">Product Name</string>
     <string name="product_price">Product Price</string>
     <string name="save">Save</string>
+    <string name="insorma_outlet_location">Insorma Outlet Location</string>
+    <string name="title_activity_maps">MapsActivity</string>
+    <string name="title_activity_about">AboutActivity</string>
 
 
 </resources>

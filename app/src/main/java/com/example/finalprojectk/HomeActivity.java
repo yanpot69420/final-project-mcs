@@ -4,7 +4,6 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -13,16 +12,12 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 import android.widget.TextView;
-
 import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.finalprojectk.adapter.ProductAdapter;
 import com.example.finalprojectk.database.Database;
 import com.example.finalprojectk.object.Product;
-
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -80,11 +75,12 @@ public class HomeActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.icAbout:
-
-            break;
+                Intent toAbout = new Intent(this, AboutActivity.class);
+                startActivity(toAbout);
+                break;
             case R.id.icHistory:
 
-            break;
+                break;
         }
         return super.onOptionsItemSelected(item);
     }
