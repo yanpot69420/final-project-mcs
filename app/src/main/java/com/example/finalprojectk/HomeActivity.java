@@ -54,7 +54,7 @@ public class HomeActivity extends AppCompatActivity {
                 } catch (JSONException e){
                     e.printStackTrace();
                 }
-        }, error -> {Log.wtf("error response", error.toString());});
+        }, error -> Log.wtf("error response", error.toString()));
         requestQueue.add(jor);
 
         cardProfile.setOnClickListener(v -> {
