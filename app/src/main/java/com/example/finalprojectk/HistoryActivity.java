@@ -21,7 +21,7 @@ public class HistoryActivity extends AppCompatActivity {
         tvNoData = findViewById(R.id.tvNoData);
         tvNoData.setVisibility(View.INVISIBLE);
         if(Database.getTransactionData(this, Database.userLog.getUserID()).size()>0) {
-            HistoryAdapter adapter = new HistoryAdapter(Database.getTransactionData(this, Database.userLog.getUserID()));
+            HistoryAdapter adapter = new HistoryAdapter(Database.getTransactionData(this, Database.userLog.getUserID()), this);
             historyList.setAdapter(adapter);
             historyList.setLayoutManager(new LinearLayoutManager(this));
         }
