@@ -71,6 +71,7 @@ ALTER TABLE `transaction`
     <string name="title_activity_maps">MapsActivity</string>
     <string name="title_activity_about">AboutActivity</string>
     <string name="transaction_history">Transaction History</string>
+    <string name="there_is_no_data">There is No Data</string>
 
 
 </resources>
