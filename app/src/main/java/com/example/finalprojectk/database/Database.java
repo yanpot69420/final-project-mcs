@@ -1,8 +1,6 @@
 package com.example.finalprojectk.database;
 
 import android.content.Context;
-import com.example.finalprojectk.object.Product;
-import com.example.finalprojectk.object.Transaction;
 import com.example.finalprojectk.object.Users;
 
 import java.util.ArrayList;
@@ -15,9 +13,5 @@ public abstract class Database {
         userList = data.getUserList();
         return userList;
     }
-
-//    public static ArrayList<Product> getProductData(){
-//        ArrayList<Product> productList;
-//
-//    }
+    public static Users userLog;
 }

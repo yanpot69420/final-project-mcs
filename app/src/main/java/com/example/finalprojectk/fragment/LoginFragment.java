@@ -11,8 +11,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.FrameLayout;
-
+import android.widget.Toast;
 import com.example.finalprojectk.HomeActivity;
 import com.example.finalprojectk.R;
 import com.example.finalprojectk.database.Database;
@@ -26,7 +25,6 @@ public class LoginFragment extends Fragment {
     Button btnLogin;
     String email, password;
     TextInputLayout emailLayout, passwordLayout;
-    FrameLayout contentLogin;
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -49,8 +47,12 @@ public class LoginFragment extends Fragment {
             initVar();
             Boolean check = checkError(email, password);
             if(check){
-                Boolean checkUser = checkUserAccount(email, password);
-                if(checkUser){
+                Integer checkUser = checkUserAccount(email, password);
+                if(checkUser == -1){
+                    Toast.makeText(getActivity(), "Error!", Toast.LENGTH_SHORT).show();
+                }
+                else {
+                    Database.userLog = Database.getUserData(getActivity()).get(checkUser);
                     Intent intent = new Intent(getActivity(), HomeActivity.class);
                     startActivity(intent);
                     requireActivity().finish();
@@ -95,21 +97,21 @@ public class LoginFragment extends Fragment {
         return temp;
     }
 
-    private Boolean checkUserAccount(String email, String password){
+    private Integer checkUserAccount(String email, String password){
         ArrayList<Users> userList = Database.getUserData(getActivity());
         for (int i=0;i<userList.size();i++) {
             if(userList.get(i).getUserEmail().equals(email)){
                 if(userList.get(i).getUserPassword().equals(password)){
-                    return true;
+                    return i;
                 }
                 else {
                     passwordLayout.setError("Password is incorrect!");
-                    return false;
+                    return -1;
                 }
             }
         }
         emailLayout.setError("Your email is not registered!");
-        return false;
+        return -1;
     }
 
 }
