@@ -6,7 +6,6 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import androidx.annotation.Nullable;
-import com.example.finalprojectk.object.Product;
 import com.example.finalprojectk.object.Transaction;
 import com.example.finalprojectk.object.Users;
 import java.util.ArrayList;
@@ -70,8 +69,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cv.put("user_phone", user.getUserPhoneNumber());
         cv.put("user_password", user.getUserPassword());
         long insert = db.insert("users", null, cv);
-        if(insert == -1) return false;
-        else return true;
+        return insert != -1;
     }
 
     public Boolean addTransaction(Transaction transaction) {
@@ -82,8 +80,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cv.put("transaction_date", transaction.getTransactionDate());
         cv.put("transaction_quantity", transaction.getQuantity());
         long insert  = db.insert("transactiondata", null, cv);
-        if(insert == -1) return false;
-        else return true;
+        return insert != -1;
     }
 
     public ArrayList<Users> getUserList(){

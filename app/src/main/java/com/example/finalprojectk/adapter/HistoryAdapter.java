@@ -38,7 +38,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         String transactionDate = transactions.get(position).getTransactionDate();
         String quantity = transactions.get(position).getQuantity().toString();
         String image = "";
-        Integer transactionPrice = 0;
+        int transactionPrice = 0;
         for (int i = 0; i < Database.productList.size(); i++) {
             if(productname.equals(Database.productList.get(i).getProductName())){
                 transactionPrice = Database.productList.get(i).getProductPrice() * transactions.get(position).getQuantity();
@@ -47,11 +47,16 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
             }
         }
         Glide.with(context).load(image).into(holder.trImage);
-        holder.trName.setText("Product : " + productname);
-        holder.trId.setText("ID : " + transactionId);
-        holder.trDate.setText("Date : " + transactionDate);
-        holder.trPrice.setText("Total Price : $" + transactionPrice);
-        holder.trQuantity.setText("Quantity : " + quantity);
+        String hpname = "Product : " + productname;
+        String htid = "ID : " + transactionId;
+        String htdate = "Date : " + transactionDate;
+        String htprice = "Total Price : $" + transactionPrice;
+        String htquant = "Quantity : " + quantity;
+        holder.trName.setText(hpname);
+        holder.trId.setText(htid);
+        holder.trDate.setText(htdate);
+        holder.trPrice.setText(htprice);
+        holder.trQuantity.setText(htquant);
     }
 
     @Override
@@ -59,7 +64,7 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
         return transactions.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public static class ViewHolder extends RecyclerView.ViewHolder {
         ImageView trImage;
         TextView trId, trPrice,trQuantity, trName, trDate;
         public ViewHolder(@NonNull View itemView) {

@@ -3,7 +3,6 @@ package com.example.finalprojectk;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -65,8 +64,10 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         Glide.with(this).load(product.getProductImage()).into(detailImage);
         detailName.setText(product.getProductName());
         detailRating.setRating(product.getProductRating());
-        detailPrice.setText("Price : $" +product.getProductPrice().toString());
-        detailDescription.setText("Description :\n"+product.getProductDescription());
+        String dtPrice = "Price : $" +product.getProductPrice().toString();
+        String dtDesc = "Description :\n"+product.getProductDescription();
+        detailPrice.setText(dtPrice);
+        detailDescription.setText(dtDesc);
     }
 
     @Override
@@ -93,7 +94,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     }
 
     void initBuyBuilder(AlertDialog.Builder builder){
-        Integer totalPrice = quantity * product.getProductPrice();
+        int totalPrice = quantity * product.getProductPrice();
         builder.setIcon(R.drawable.black_cart)
                 .setTitle("Buy "+ quantity + "x "+ product.getProductName() + "for $" + totalPrice+ " ?")
                 .setCancelable(true)
@@ -109,8 +110,6 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
                     quantity = 0;
                     detailQuantity.setText(String.valueOf(quantity));
                 })
-                .setNegativeButton("No", (dialogInterface, i) -> {
-                    dialogInterface.cancel();
-                });
+                .setNegativeButton("No", (dialogInterface, i) -> dialogInterface.cancel());
     }
 }

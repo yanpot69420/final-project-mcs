@@ -2,23 +2,18 @@ package com.example.finalprojectk.adapter;
 
 import android.content.Context;
 import android.content.Intent;
-import android.os.Parcelable;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
-import android.widget.Toast;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.bumptech.glide.Glide;
 import com.example.finalprojectk.DetailActivity;
 import com.example.finalprojectk.R;
 import com.example.finalprojectk.object.Product;
-
 import java.util.ArrayList;
 
 
@@ -44,11 +39,11 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         String image = productList.get(position).getProductImage();
         Integer price = productList.get(position).getProductPrice();
         Float rating = productList.get(position).getProductRating();
-
+        String pPrice = "Price : $"+price;
         holder.pName.setText(name);
-        holder.pPrice.setText("Price : $"+String.valueOf(price));
+        holder.pPrice.setText(pPrice);
         holder.pRating.setRating(rating);
-        Glide.with(context).load(productList.get(position).getProductImage()).into(holder.pImage);
+        Glide.with(context).load(image).into(holder.pImage);
         holder.itemView.setOnClickListener(v -> {
             Intent intent = new Intent(context, DetailActivity.class);
             Product detail = productList.get(position);
@@ -62,7 +57,7 @@ public class ProductAdapter extends RecyclerView.Adapter<ProductAdapter.ViewHold
         return productList.size();
     }
 
-    public class ViewHolder extends RecyclerView.ViewHolder{
+    public static class ViewHolder extends RecyclerView.ViewHolder{
         TextView pName, pPrice;
         RatingBar pRating;
         ImageView pImage;

@@ -1,14 +1,9 @@
 package com.example.finalprojectk.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
-
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -26,7 +21,6 @@ public class RegisterFragment extends Fragment {
     Button btnRegister;
     String email, username, phone, password;
     TextInputLayout emailLayout, usernameLayout, phoneLayout, passwordLayout;
-    FragmentTransaction fr;
     DatabaseHelper dhRegister;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -47,17 +41,15 @@ public class RegisterFragment extends Fragment {
         btnRegister.setOnClickListener(v -> {
             resetError();
             initVar();
-            Boolean check = checkError(email, username, phone, password);
+            boolean check = checkError(email, username, phone, password);
             if(check){
                 Users user = new Users(-1,email, username, phone, password);
-                if(user!=null){
-                    boolean checkInsert = dhRegister.addUser(user);
-                    if(!checkInsert)
-                        Toast.makeText(getActivity(), "Attempt Failed!", Toast.LENGTH_SHORT).show();
-                    else {
-                        emptyEditText();
-                        Toast.makeText(getActivity(), "Your account has been created!", Toast.LENGTH_SHORT).show();
-                    }
+                boolean checkInsert = dhRegister.addUser(user);
+                if(!checkInsert)
+                    Toast.makeText(getActivity(), "Attempt Failed!", Toast.LENGTH_SHORT).show();
+                else {
+                    emptyEditText();
+                    Toast.makeText(getActivity(), "Your account has been created!", Toast.LENGTH_SHORT).show();
                 }
             }
             else {
