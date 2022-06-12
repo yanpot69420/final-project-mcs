@@ -27,7 +27,6 @@ import java.util.ArrayList;
 public class HomeActivity extends AppCompatActivity {
     TextView userName;
     RecyclerView productList;
-    ArrayList<Product> products = new ArrayList<>();
     FrameLayout cardProfile;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,7 +47,7 @@ public class HomeActivity extends AppCompatActivity {
                         Integer pPrice = jobj.getInt("price");
                         String pImage = jobj.getString("image");
                         String pDescription = jobj.getString("description");
-                        products.add(new Product(pName, pRating, pPrice, pImage, pDescription));
+                        Database.productList.add(new Product(pName, pRating, pPrice, pImage, pDescription));
                     }
                     configRV();
                 } catch (JSONException e){
@@ -93,7 +92,7 @@ public class HomeActivity extends AppCompatActivity {
     }
 
     void configRV(){
-        ProductAdapter rvAdapter = new ProductAdapter(products, this);
+        ProductAdapter rvAdapter = new ProductAdapter(Database.productList, this);
         productList.setAdapter(rvAdapter);
         productList.setLayoutManager(new LinearLayoutManager(this));
     }

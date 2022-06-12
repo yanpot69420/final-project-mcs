@@ -2,6 +2,7 @@ package com.example.finalprojectk.database;
 
 import android.content.Context;
 
+import com.example.finalprojectk.object.Product;
 import com.example.finalprojectk.object.Transaction;
 import com.example.finalprojectk.object.Users;
 
@@ -21,5 +22,6 @@ public abstract class Database {
         transactionList = data.getTransactionHistory(userID);
         return transactionList;
     }
+    public static ArrayList<Product> productList = new ArrayList<>();
     public static Users userLog;
 }
