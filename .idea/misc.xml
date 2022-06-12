@@ -4,15 +4,17 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/62821/AndroidStudioProjects/final projectx/app/src/main/res/drawable-v24/ic_launcher_foreground.xml" value="0.3395" />
+        <entry key="..\:/Users/62821/AndroidStudioProjects/final projectx/app/src/main/res/drawable/black_cart.xml" value="0.3395" />
         <entry key="..\:/Users/62821/AndroidStudioProjects/final projectx/app/src/main/res/drawable/ic_about.xml" value="0.215" />
         <entry key="..\:/Users/62821/AndroidStudioProjects/final projectx/app/src/main/res/drawable/ic_baseline_delete_.xml" value="0.3395" />
         <entry key="..\:/Users/62821/AndroidStudioProjects/final projectx/app/src/main/res/drawable/ic_baseline_edit_24.xml" value="0.3395" />
+        <entry key="..\:/Users/62821/AndroidStudioProjects/final projectx/app/src/main/res/drawable/ic_baseline_info_24.xml" value="0.3395" />
         <entry key="..\:/Users/62821/AndroidStudioProjects/final projectx/app/src/main/res/drawable/ic_history.xml" value="0.3395" />
         <entry key="..\:/Users/62821/AndroidStudioProjects/final projectx/app/src/main/res/drawable/user_vector.xml" value="0.3395" />
         <entry key="..\:/Users/62821/AndroidStudioProjects/final projectx/app/src/main/res/font/fxasdasdasd.xml" value="0.24479166666666666" />
         <entry key="..\:/Users/62821/AndroidStudioProjects/final projectx/app/src/main/res/layout/activity_about.xml" value="0.17239583333333333" />
         <entry key="..\:/Users/62821/AndroidStudioProjects/final projectx/app/src/main/res/layout/activity_detail.xml" value="0.2796296296296296" />
-        <entry key="..\:/Users/62821/AndroidStudioProjects/final projectx/app/src/main/res/layout/activity_home.xml" value="0.34479166666666666" />
+        <entry key="..\:/Users/62821/AndroidStudioProjects/final projectx/app/src/main/res/layout/activity_home.xml" value="0.17239583333333333" />
         <entry key="..\:/Users/62821/AndroidStudioProjects/final projectx/app/src/main/res/layout/activity_landing.xml" value="0.2351851851851852" />
         <entry key="..\:/Users/62821/AndroidStudioProjects/final projectx/app/src/main/res/layout/activity_main.xml" value="0.23229166666666667" />
         <entry key="..\:/Users/62821/AndroidStudioProjects/final projectx/app/src/main/res/layout/activity_profile.xml" value="0.30648148148148147" />

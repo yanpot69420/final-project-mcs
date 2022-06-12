@@ -5,11 +5,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.widget.FrameLayout;
 import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
@@ -30,6 +32,7 @@ public class HomeActivity extends AppCompatActivity {
     TextView userName;
     RecyclerView productList;
     ArrayList<Product> products = new ArrayList<>();
+    FrameLayout cardProfile;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,9 +41,7 @@ public class HomeActivity extends AppCompatActivity {
 
         String url = "https://mocki.io/v1/5f379081-2473-4494-9cc3-9e808772dc54";
         RequestQueue requestQueue = Volley.newRequestQueue(this);
-        JsonObjectRequest jor = new JsonObjectRequest(url, new Response.Listener<JSONObject>() {
-            @Override
-            public void onResponse(JSONObject response) {
+        JsonObjectRequest jor = new JsonObjectRequest(url, response -> {
                 try {
                     JSONArray array = response.getJSONArray("furnitures");
                     for (int i = 0; i < array.length(); i++) {
@@ -57,14 +58,14 @@ public class HomeActivity extends AppCompatActivity {
                 } catch (JSONException e){
                     e.printStackTrace();
                 }
-            }
-        }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Log.wtf("error response", error.toString());
-            }
-        });
+        }, error -> {Log.wtf("error response", error.toString());});
         requestQueue.add(jor);
+
+        cardProfile.setOnClickListener(v -> {
+            Intent intent = new Intent(this, ProfileActivity.class);
+            startActivity(intent);
+        });
+
     }
 
     @Override
@@ -90,6 +91,7 @@ public class HomeActivity extends AppCompatActivity {
     void initView() {
         userName = findViewById(R.id.userName);
         productList = findViewById(R.id.productList);
+        cardProfile = findViewById(R.id.cardProfile);
     }
 
     void configRV(){
