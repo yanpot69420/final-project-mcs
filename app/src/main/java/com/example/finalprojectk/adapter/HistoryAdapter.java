@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.finalprojectk.R;
 import com.example.finalprojectk.object.Transaction;
 
+import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 
 public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHolder> {
@@ -24,16 +25,20 @@ public class HistoryAdapter extends RecyclerView.Adapter<HistoryAdapter.ViewHold
     @NonNull
     @Override
     public HistoryAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.activity_history, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.history_item, parent, false);
         return new ViewHolder(view);
     }
 
     @Override
     public void onBindViewHolder(@NonNull HistoryAdapter.ViewHolder holder, int position) {
-        holder.trName.setText(transactions.get(position).getProductID());
-        holder.trId.setText(transactions.get(position).getTransactionID());
-        holder.trDate.setText(transactions.get(position).getTransactionDate());
-        holder.trQuantity.setText(transactions.get(position).getQuantity().toString());
+        String productname = transactions.get(position).getProductID();
+        String transactionId = transactions.get(position).getTransactionID().toString();
+        String transactionDate = transactions.get(position).getTransactionDate();
+        String quantity = transactions.get(position).getQuantity().toString();
+        holder.trName.setText(productname);
+        holder.trId.setText(transactionId);
+        holder.trDate.setText(transactionDate);
+        holder.trQuantity.setText(quantity);
     }
 
     @Override

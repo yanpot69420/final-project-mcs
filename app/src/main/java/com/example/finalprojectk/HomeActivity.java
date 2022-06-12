@@ -79,7 +79,8 @@ public class HomeActivity extends AppCompatActivity {
                 startActivity(toAbout);
                 break;
             case R.id.icHistory:
-
+                Intent toHistory = new Intent(this, HistoryActivity.class);
+                startActivity(toHistory);
                 break;
         }
         return super.onOptionsItemSelected(item);
