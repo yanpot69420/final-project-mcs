@@ -2,10 +2,8 @@ package com.example.finalprojectk;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
-
 import android.os.Bundle;
-import android.view.Menu;
-import android.view.MenuInflater;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -13,12 +11,21 @@ import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.bumptech.glide.Glide;
+import com.example.finalprojectk.database.Database;
+import com.example.finalprojectk.database.DatabaseHelper;
 import com.example.finalprojectk.object.Product;
+import com.example.finalprojectk.object.Transaction;
+
+import java.text.DateFormat;
+import java.util.Calendar;
 
 public class DetailActivity extends AppCompatActivity implements View.OnClickListener{
     TextView detailName, detailPrice, detailDescription, detailQuantity;
     Button btnIncrease, btnDecrease, btnBuy;
     AlertDialog.Builder buyNotification;
+    DatabaseHelper dhDetail;
+    Calendar calendar = Calendar.getInstance();
+    String currentDate;
     RatingBar detailRating;
     ImageView detailImage;
     Integer quantity = 0;
@@ -28,6 +35,8 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         initView();
+        dhDetail = new DatabaseHelper(DetailActivity.this);
+        currentDate = DateFormat.getDateInstance().format(calendar.getTime());
         product = (Product) getIntent().getSerializableExtra("detail");
         buyNotification = new AlertDialog.Builder(this);
         if(product!=null){
@@ -89,6 +98,14 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
                 .setTitle("Buy "+ quantity + "x "+ product.getProductName() + "for $" + totalPrice+ " ?")
                 .setCancelable(true)
                 .setPositiveButton("Yes", (dialogInterface, i) -> {
+                    Transaction transaction = new Transaction(-1, Database.userLog.getUserID(), product.getProductName(), currentDate, quantity);
+                    boolean checkInsert = dhDetail.addTransaction(transaction);
+                    if(!checkInsert){
+                        Toast.makeText(this, "Attemp Failed", Toast.LENGTH_SHORT).show();
+                    }
+                    else {
+                        Toast.makeText(this, "Inserted Succesfully", Toast.LENGTH_SHORT).show();
+                    }
                     quantity = 0;
                     detailQuantity.setText(String.valueOf(quantity));
                 })

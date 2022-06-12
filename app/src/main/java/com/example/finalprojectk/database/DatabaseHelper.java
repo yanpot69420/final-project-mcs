@@ -19,32 +19,31 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         String create_users = "CREATE TABLE \"users\" (\n" +
-                "\t\"UserID\" integer primary key autoincrement,\n" +
-                "\t\"UserEmailAddress\" varchar not null\t,\n" +
-                "\t\"UserUsername\" varchar not null , \n" +
-                "\t\"UserPhoneNumber\" varchar not null,\n" +
-                "\t\"UserPassword\" varchar not null\n" +
+                "\t\"user_id\" integer primary key autoincrement,\n" +
+                "\t\"user_email\" varchar not null\t,\n" +
+                "\t\"user_name\" varchar not null , \n" +
+                "\t\"user_phone\" varchar not null,\n" +
+                "\t\"user_password\" varchar not null\n" +
                 ");";
         String create_products = "CREATE TABLE \"product\" (\n" +
-                "\t\"ProductName\" varchar primary key,\n" +
-                "\t\"ProductRating\" integer not null,\n" +
-                "\t\"ProductPrice\" integer not null,\n" +
-                "\t\"ProductImage\" varchar not null,\n" +
-                "\t\"ProductDescription\" varchar not null\n" +
+                "\t\"product_name\" varchar primary key,\n" +
+                "\t\"product_rating\" integer not null,\n" +
+                "\t\"product_price\" integer not null,\n" +
+                "\t\"product_image\" varchar not null,\n" +
+                "\t\"product_description\" varchar not null\n" +
                 ");";
-        String create_transaction = "CREATE TABLE \"transaction\" (\n" +
-                "\t\"TransactionID\"\tinteger primary key autoincrement,\n" +
-                "\t\"UserID\" varchar not null,\n" +
-                "\t\"ProductName\" varchar not null\t,\n" +
-                "\t\"TransactionDate\" date not null,\n" +
-                "\t\"Quantity\" integer\tnot null,\n" +
-                "\tforeign key (UserID)\n" +
-                "\treferences users(UserID)\n" +
+        String create_transaction = "CREATE TABLE \"transactiondata\" (\n" +
+                "\t\"transaction_id\"\tinteger primary key autoincrement,\n" +
+                "\t\"transaction_userid\" integer not null,\n" +
+                "\t\"transaction_product\" varchar not null\t,\n" +
+                "\t\"transaction_date\" varchar not null,\n" +
+                "\t\"transaction_quantity\" integer\tnot null,\n" +
+                "\tforeign key (transaction_userid)\n" +
+                "\treferences users(user_id)\n" +
                 "\ton update cascade\n" +
-                "\ton delete cascade\n" +
                 "\ton delete cascade,\n" +
-                "\tforeign key (ProductName)\n" +
-                "\treferences product(ProductName)\n" +
+                "\tforeign key (transaction_product)\n" +
+                "\treferences product(product_name)\n" +
                 "\ton update cascade\n" +
                 "\ton delete cascade\n" +
                 ");";
@@ -66,10 +65,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Boolean addUser(Users user) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
-        cv.put("useremailaddress", user.getUserEmail());
-        cv.put("userusername", user.getUserUsername());
-        cv.put("userphonenumber", user.getUserPhoneNumber());
-        cv.put("userpassword", user.getUserPassword());
+        cv.put("user_email", user.getUserEmail());
+        cv.put("user_name", user.getUserUsername());
+        cv.put("user_phone", user.getUserPhoneNumber());
+        cv.put("user_password", user.getUserPassword());
         long insert = db.insert("users", null, cv);
         if(insert == -1) return false;
         else return true;
@@ -78,11 +77,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public Boolean addTransaction(Transaction transaction) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
-        cv.put("userid", transaction.getUserID());
-        cv.put("productname", transaction.getProductID());
-        cv.put("transactiondate", transaction.getTransactionDate());
-        cv.put("quantity", transaction.getQuantity());
-        long insert  = db.insert("transaction", null, cv);
+        cv.put("transaction_userid", transaction.getUserID());
+        cv.put("transaction_product", transaction.getProductID());
+        cv.put("transaction_date", transaction.getTransactionDate());
+        cv.put("transaction_quantity", transaction.getQuantity());
+        long insert  = db.insert("transactiondata", null, cv);
         if(insert == -1) return false;
         else return true;
     }
