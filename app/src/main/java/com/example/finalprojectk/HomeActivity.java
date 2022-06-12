@@ -1,11 +1,15 @@
 package com.example.finalprojectk;
 
+import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 import com.android.volley.RequestQueue;
@@ -61,6 +65,26 @@ public class HomeActivity extends AppCompatActivity {
             }
         });
         requestQueue.add(jor);
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.home_menu, menu);
+        return true;
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(@NonNull MenuItem item) {
+        switch (item.getItemId()){
+            case R.id.icAbout:
+
+            break;
+            case R.id.icHistory:
+
+            break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 
     void initView() {

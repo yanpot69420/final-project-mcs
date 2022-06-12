@@ -4,23 +4,23 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.RatingBar;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import com.bumptech.glide.Glide;
 import com.example.finalprojectk.object.Product;
-import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 
 public class DetailActivity extends AppCompatActivity implements View.OnClickListener{
-    ImageView detailImage;
     TextView detailName, detailPrice, detailDescription, detailQuantity;
     Button btnIncrease, btnDecrease, btnBuy;
     AlertDialog.Builder buyNotification;
     RatingBar detailRating;
+    ImageView detailImage;
     Integer quantity = 0;
     Product product;
     @Override
@@ -38,6 +38,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         btnDecrease.setOnClickListener(this);
         btnBuy.setOnClickListener(this);
     }
+
 
     void initView(){
         detailImage = findViewById(R.id.detailImage);
