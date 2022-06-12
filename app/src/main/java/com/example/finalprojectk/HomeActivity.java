@@ -20,6 +20,7 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
 import com.android.volley.toolbox.Volley;
 import com.example.finalprojectk.adapter.ProductAdapter;
+import com.example.finalprojectk.database.Database;
 import com.example.finalprojectk.object.Product;
 
 import org.json.JSONArray;
@@ -38,7 +39,7 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         initView();
-
+        userName.setText(Database.userLog.getUserUsername());
         String url = "https://mocki.io/v1/5f379081-2473-4494-9cc3-9e808772dc54";
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         JsonObjectRequest jor = new JsonObjectRequest(url, response -> {
