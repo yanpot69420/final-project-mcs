@@ -106,4 +106,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.close();
         return  returnList;
     }
+
+    public ArrayList<Transaction> getTransactionHistory(Integer userID){
+        ArrayList<Transaction> returnList = new ArrayList<>();
+        String query = "select * from transactiondata where transaction_userid = "+ userID;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = db.rawQuery(query, null);
+        if(cursor.moveToFirst()){
+            do {
+                int cID = cursor.getInt(0);
+                int cUserid = cursor.getInt(1);
+                String cProduct = cursor.getString(2);
+                String cDate = cursor.getString(3);
+                Integer cQuantity = cursor.getInt(4);
+                Transaction transaction = new Transaction(cID, cUserid, cProduct, cDate, cQuantity);
+                returnList.add(transaction);
+            } while (cursor.moveToNext());
+        }
+        cursor.close();
+        db.close();
+        return returnList;
+    }
 }
