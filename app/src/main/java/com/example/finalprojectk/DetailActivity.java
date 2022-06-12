@@ -33,7 +33,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         if(product!=null){
             initVar(product);
         }
-        initBuyBuilder(buyNotification);
+
         btnIncrease.setOnClickListener(this);
         btnDecrease.setOnClickListener(this);
         btnBuy.setOnClickListener(this);
@@ -60,22 +60,6 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         detailDescription.setText("Description :\n"+product.getProductDescription());
     }
 
-    void initBuyBuilder(AlertDialog.Builder builder){
-
-        builder.setIcon(R.drawable.black_cart)
-                .setTitle("Are you sure you wanna buy this item for 69$?")
-                .setCancelable(true)
-                .setPositiveButton("Yes", (dialogInterface, i) -> {
-                    Toast.makeText(this, "Terbeli coy", Toast.LENGTH_SHORT).show();
-                    quantity = 0;
-                    detailQuantity.setText(String.valueOf(quantity));
-
-                })
-                .setNegativeButton("No", (dialogInterface, i) -> {
-                    dialogInterface.cancel();
-                });
-    }
-
     @Override
     public void onClick(View view) {
         switch (view.getId()){
@@ -92,9 +76,24 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
                 if(quantity<1)
                     Toast.makeText(this, "Quantity must be greater than 0", Toast.LENGTH_SHORT).show();
                 else {
+                    initBuyBuilder(buyNotification);
                     buyNotification.show();
                 }
                 break;
         }
+    }
+
+    void initBuyBuilder(AlertDialog.Builder builder){
+        Integer totalPrice = quantity * product.getProductPrice();
+        builder.setIcon(R.drawable.black_cart)
+                .setTitle("Buy "+ quantity + "x "+ product.getProductName() + "for $" + totalPrice+ " ?")
+                .setCancelable(true)
+                .setPositiveButton("Yes", (dialogInterface, i) -> {
+                    quantity = 0;
+                    detailQuantity.setText(String.valueOf(quantity));
+                })
+                .setNegativeButton("No", (dialogInterface, i) -> {
+                    dialogInterface.cancel();
+                });
     }
 }
