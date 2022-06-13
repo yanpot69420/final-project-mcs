@@ -72,6 +72,11 @@ public class HomeActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
+            case R.id.icHome:
+                Intent toRefresh = new Intent(this, HomeActivity.class);
+                startActivity(toRefresh);
+                finish();
+                break;
             case R.id.icAbout:
                 Intent toAbout = new Intent(this, AboutActivity.class);
                 startActivity(toAbout);

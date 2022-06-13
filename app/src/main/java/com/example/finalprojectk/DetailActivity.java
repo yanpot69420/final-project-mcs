@@ -96,16 +96,16 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     void initBuyBuilder(AlertDialog.Builder builder){
         int totalPrice = quantity * product.getProductPrice();
         builder.setIcon(R.drawable.black_cart)
-                .setTitle("Buy "+ quantity + "x "+ product.getProductName() + "for $" + totalPrice+ " ?")
+                .setTitle("Buy "+ quantity + "x "+ product.getProductName() + " for $" + totalPrice+ " ?")
                 .setCancelable(true)
                 .setPositiveButton("Yes", (dialogInterface, i) -> {
                     Transaction transaction = new Transaction(-1, Database.userLog.getUserID(), product.getProductName(), currentDate, quantity);
                     boolean checkInsert = dhDetail.addTransaction(transaction);
                     if(!checkInsert){
-                        Toast.makeText(this, "Attemp Failed", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Error!", Toast.LENGTH_SHORT).show();
                     }
                     else {
-                        Toast.makeText(this, "Inserted Succesfully", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(this, "Item Purchased", Toast.LENGTH_SHORT).show();
                     }
                     quantity = 0;
                     detailQuantity.setText(String.valueOf(quantity));

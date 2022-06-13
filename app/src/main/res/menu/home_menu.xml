@@ -2,6 +2,11 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
+    <item android:id="@+id/icHome"
+        android:title="@string/home"
+        android:icon="@drawable/ic_home"
+        app:showAsAction="ifRoom"/>
+
     <item android:id="@+id/icHistory"
         android:title="@string/history"
         android:icon="@drawable/ic_history"
