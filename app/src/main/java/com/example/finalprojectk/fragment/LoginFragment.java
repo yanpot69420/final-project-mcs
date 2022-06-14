@@ -40,8 +40,8 @@ public class LoginFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
+        Database.getUserData(getActivity());
         initView(view);
-
         btnLogin.setOnClickListener(v -> {
             resetError();
             initVar();

@@ -10,20 +10,24 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.example.finalprojectk.database.Database;
+import com.example.finalprojectk.database.DatabaseHelper;
 
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener{
     TextView profileEmail, profilePhone;
     EditText profileName;
     ImageButton btnEdit, btnDelete;
     Button btnSave, btnOut;
+    DatabaseHelper ph;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_profile);
         initView();
         initVar();
+        ph = new DatabaseHelper(this);
         btnSave.setVisibility(View.INVISIBLE);
         btnSave.setOnClickListener(this);
         btnDelete.setOnClickListener(this);
@@ -64,6 +68,11 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                         .setTitle("Delete your account ?")
                         .setCancelable(true)
                         .setPositiveButton("Yes", (dialogInterface, i) -> {
+                            Boolean check = ph.deleteUser(Database.userLog.getUserID());
+                            if(check)
+                                Toast.makeText(this, "Account Deleted", Toast.LENGTH_SHORT);
+                            else
+                                Toast.makeText(this, "Failed to delete", Toast.LENGTH_SHORT).show();
                             Intent toDelete = new Intent(this, LandingActivity.class);
                             startActivity(toDelete);
                             finish();

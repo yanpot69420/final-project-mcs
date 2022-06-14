@@ -83,6 +83,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return insert != -1;
     }
 
+    public Boolean deleteUser(Integer id){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "delete from users where user_id = "+id;
+        Cursor cursor = db.rawQuery(query, null);
+        if(cursor.moveToFirst())
+            return false;
+        else
+            return true;
+    }
+
     public ArrayList<Users> getUserList(){
         ArrayList<Users> returnList = new ArrayList<>();
         String query = "select * from users";
