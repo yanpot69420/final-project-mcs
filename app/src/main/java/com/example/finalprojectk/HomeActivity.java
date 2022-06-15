@@ -32,7 +32,6 @@ public class HomeActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
         initView();
-        userName.setText(Database.userLog.getUserUsername());
         String url = "https://mocki.io/v1/5f379081-2473-4494-9cc3-9e808772dc54";
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         JsonObjectRequest jor = new JsonObjectRequest(url, response -> {
@@ -60,6 +59,12 @@ public class HomeActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        userName.setText(Database.userLog.getUserUsername());
     }
 
     @Override

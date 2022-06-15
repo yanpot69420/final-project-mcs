@@ -89,8 +89,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(query, null);
         if(cursor.moveToFirst())
             return false;
-        else
-            return true;
+        return true;
+    }
+
+    public Boolean changeUsername(String username, Integer userId){
+        SQLiteDatabase db = this.getWritableDatabase();
+        String query = "update users set user_name = '"+username+"' where user_id = "+userId+"";
+        Cursor cursor = db.rawQuery(query, null);
+        if(cursor.moveToFirst())
+            return false;
+        return true;
     }
 
     public ArrayList<Users> getUserList(){
