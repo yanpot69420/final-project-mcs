@@ -66,7 +66,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                         profileName.setError("Username already in use!");
                     }
                     else {
-                        Boolean del = ph.changeUsername(newUsername, Database.userLog.getUserID());
+                        ph.changeUsername(newUsername, Database.userLog.getUserID());
                         Database.userLog.setUserUsername(newUsername);
                         Intent toRefresh = new Intent(this, ProfileActivity.class);
                         startActivity(toRefresh);
@@ -91,7 +91,7 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
                         .setPositiveButton("Yes", (dialogInterface, i) -> {
                             Boolean check = ph.deleteUser(Database.userLog.getUserID());
                             if(check){
-                                Toast.makeText(this, "Account Deleted", Toast.LENGTH_SHORT);
+                                Toast.makeText(this, "Account Deleted", Toast.LENGTH_SHORT).show();
                                 Intent toDelete = new Intent(this, LandingActivity.class);
                                 startActivity(toDelete);
                                 finish();
@@ -132,8 +132,6 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
     }
 
     private Boolean checkUserChar(String username) {
-        if(username.length()>=3 && username.length()<=20)
-            return true;
-        return false;
+        return username.length() >= 3 && username.length() <= 20;
     }
 }

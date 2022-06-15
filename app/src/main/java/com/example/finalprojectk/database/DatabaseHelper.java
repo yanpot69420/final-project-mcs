@@ -5,8 +5,6 @@ import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
-import android.util.Log;
-
 import androidx.annotation.Nullable;
 import com.example.finalprojectk.object.Transaction;
 import com.example.finalprojectk.object.Users;
@@ -91,6 +89,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(query, null);
         if(cursor.moveToFirst())
             return false;
+        cursor.close();
         return true;
     }
 
@@ -100,6 +99,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         Cursor cursor = db.rawQuery(query, null);
         if(cursor.moveToFirst())
             return false;
+        cursor.close();
         return true;
     }
 
