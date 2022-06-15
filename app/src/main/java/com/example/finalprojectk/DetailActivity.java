@@ -2,7 +2,13 @@ package com.example.finalprojectk;
 
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
+
+import android.Manifest;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -22,6 +28,8 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
     TextView detailName, detailPrice, detailDescription, detailQuantity;
     Button btnIncrease, btnDecrease, btnBuy;
     AlertDialog.Builder buyNotification;
+    SmsManager smsManager;
+    Integer sendSmsPermission;
     DatabaseHelper dhDetail;
     Calendar calendar = Calendar.getInstance();
     String currentDate;
@@ -34,6 +42,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_detail);
         initView();
+        permitSms();
         dhDetail = new DatabaseHelper(DetailActivity.this);
         currentDate = DateFormat.getDateInstance().format(calendar.getTime());
         product = (Product) getIntent().getSerializableExtra("detail");
@@ -105,11 +114,22 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
                         Toast.makeText(this, "Error!", Toast.LENGTH_SHORT).show();
                     }
                     else {
+                        String message = "Thanks for purchasing "+ quantity + "x "+ product.getProductName();
+                        String phone = "5554";
                         Toast.makeText(this, "Item Purchased", Toast.LENGTH_SHORT).show();
+                        smsManager.sendTextMessage(phone, null, message, null, null);
                     }
                     quantity = 0;
                     detailQuantity.setText(String.valueOf(quantity));
                 })
                 .setNegativeButton("No", (dialogInterface, i) -> dialogInterface.cancel());
+    }
+
+    void permitSms(){
+        smsManager = SmsManager.getDefault();
+        sendSmsPermission = ContextCompat.checkSelfPermission(this, Manifest.permission.SEND_SMS);
+        if(sendSmsPermission != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.SEND_SMS},1 );
+        }
     }
 }
