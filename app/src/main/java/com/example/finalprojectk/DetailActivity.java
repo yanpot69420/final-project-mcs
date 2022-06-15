@@ -117,7 +117,7 @@ public class DetailActivity extends AppCompatActivity implements View.OnClickLis
                         String message = "Thanks for purchasing "+ quantity + "x "+ product.getProductName();
                         String phone = "5554";
                         Toast.makeText(this, "Item Purchased", Toast.LENGTH_SHORT).show();
-                        smsManager.sendTextMessage(phone, null, message, null, null);
+                        smsManager.sendTextMessage(phone, null, message, null,  null);
                     }
                     quantity = 0;
                     detailQuantity.setText(String.valueOf(quantity));

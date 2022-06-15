@@ -14,6 +14,9 @@ import android.widget.Toast;
 
 import com.example.finalprojectk.database.Database;
 import com.example.finalprojectk.database.DatabaseHelper;
+import com.example.finalprojectk.object.Users;
+
+import java.util.ArrayList;
 
 public class ProfileActivity extends AppCompatActivity implements View.OnClickListener{
     TextView profileEmail, profilePhone;
@@ -58,17 +61,21 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         switch (view.getId()){
             case R.id.btnSave:
                 String newUsername = profileName.getText().toString();
-                boolean checkUser = checkUsername(newUsername);
-                if(checkUser){
-                    Boolean del = ph.changeUsername(newUsername, Database.userLog.getUserID());
-                    Database.userLog.setUserUsername(newUsername);
-                    Intent toRefresh = new Intent(this, ProfileActivity.class);
-                    startActivity(toRefresh);
-                    finish();
-                    Toast.makeText(this, "Username changed", Toast.LENGTH_SHORT).show();
+                if(checkUserChar(newUsername)){
+                    if(checkUsername(newUsername)){
+                        profileName.setError("Username already in use!");
+                    }
+                    else {
+                        Boolean del = ph.changeUsername(newUsername, Database.userLog.getUserID());
+                        Database.userLog.setUserUsername(newUsername);
+                        Intent toRefresh = new Intent(this, ProfileActivity.class);
+                        startActivity(toRefresh);
+                        finish();
+                        Toast.makeText(this, "Username changed", Toast.LENGTH_SHORT).show();
+                    }
                 }
                 else {
-                    profileName.setText(Database.userLog.getUserUsername());
+                    profileName.setError("Username must be between 3-20 characters");
                 }
                 break;
             case R.id.btnEdit:
@@ -114,11 +121,19 @@ public class ProfileActivity extends AppCompatActivity implements View.OnClickLi
         }
     }
 
-    Boolean checkUsername(String username) {
+    private Boolean checkUsername(String username){
+        ArrayList<Users> usernameList = Database.getUserData(this);
+        for (int i = 0; i < usernameList.size(); i++) {
+            if(usernameList.get(i).getUserUsername().equals(username)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private Boolean checkUserChar(String username) {
         if(username.length()>=3 && username.length()<=20)
             return true;
-        profileName.requestFocus();
-        profileName.setError("Username must be between 3-20 characters");
         return false;
     }
 }

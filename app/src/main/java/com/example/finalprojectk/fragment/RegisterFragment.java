@@ -11,9 +11,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 import com.example.finalprojectk.R;
+import com.example.finalprojectk.database.Database;
 import com.example.finalprojectk.database.DatabaseHelper;
 import com.example.finalprojectk.object.Users;
 import com.google.android.material.textfield.TextInputLayout;
+
+import java.util.ArrayList;
 
 
 public class RegisterFragment extends Fragment {
@@ -99,6 +102,16 @@ public class RegisterFragment extends Fragment {
             usernameLayout.setError("Username must be between 3-20 characters");
         }
 
+        if(checkEmail(email)){
+            temp = false;
+            emailLayout.setError("Email already in use");
+        }
+
+        if(checkUsername(username)){
+            temp = false;
+            usernameLayout.setError("Username already in use");
+        }
+
         if(username.length()==0){
             temp = false;
             usernameLayout.setError("Field cannot be empty!");
@@ -121,4 +134,23 @@ public class RegisterFragment extends Fragment {
         passwordLayout.setError(null);
     }
 
+    private Boolean checkEmail(String email){
+        ArrayList<Users> emailList = Database.getUserData(getActivity());
+        for (int i = 0; i < emailList.size(); i++) {
+            if(emailList.get(i).getUserEmail().equals(email)){
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private Boolean checkUsername(String username){
+        ArrayList<Users> usernameList = Database.getUserData(getActivity());
+        for (int i = 0; i < usernameList.size(); i++) {
+            if(usernameList.get(i).getUserUsername().equals(username)){
+                return true;
+            }
+        }
+        return false;
+    }
 }

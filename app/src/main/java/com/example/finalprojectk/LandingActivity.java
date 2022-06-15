@@ -3,6 +3,9 @@ package com.example.finalprojectk;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewpager2.widget.ViewPager2;
 import android.os.Bundle;
+import android.util.Log;
+
+import com.example.finalprojectk.database.DatabaseHelper;
 import com.example.finalprojectk.fragment.FragmentAdapter;
 import com.google.android.material.tabs.TabLayout;
 
