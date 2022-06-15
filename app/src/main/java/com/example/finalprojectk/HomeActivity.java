@@ -78,6 +78,7 @@ public class HomeActivity extends AppCompatActivity {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()){
             case R.id.icHome:
+                Database.productList.clear();
                 Intent toRefresh = new Intent(this, HomeActivity.class);
                 startActivity(toRefresh);
                 finish();
