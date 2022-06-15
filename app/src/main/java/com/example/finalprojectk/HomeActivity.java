@@ -22,6 +22,7 @@ import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+// Reyhan Akhmad Aulia Mochram - 2440068676
 
 public class HomeActivity extends AppCompatActivity {
     TextView userName;
