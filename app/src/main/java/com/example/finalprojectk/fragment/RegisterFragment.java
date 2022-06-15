@@ -24,6 +24,7 @@ public class RegisterFragment extends Fragment {
     Button btnRegister;
     String email, username, phone, password;
     TextInputLayout emailLayout, usernameLayout, phoneLayout, passwordLayout;
+    private static ArrayList<Users> userList;
     DatabaseHelper dhRegister;
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -44,6 +45,7 @@ public class RegisterFragment extends Fragment {
         btnRegister.setOnClickListener(v -> {
             resetError();
             initVar();
+            userList = Database.getUserData(getActivity());
             boolean check = checkError(email, username, phone, password);
             if(check){
                 Users user = new Users(-1,email, username, phone, password);
@@ -135,9 +137,9 @@ public class RegisterFragment extends Fragment {
     }
 
     private Boolean checkEmail(String email){
-        ArrayList<Users> emailList = Database.getUserData(getActivity());
-        for (int i = 0; i < emailList.size(); i++) {
-            if(emailList.get(i).getUserEmail().equals(email)){
+
+        for (int i = 0; i < userList.size(); i++) {
+            if(userList.get(i).getUserEmail().equals(email)){
                 return true;
             }
         }
@@ -145,9 +147,9 @@ public class RegisterFragment extends Fragment {
     }
 
     private Boolean checkUsername(String username){
-        ArrayList<Users> usernameList = Database.getUserData(getActivity());
-        for (int i = 0; i < usernameList.size(); i++) {
-            if(usernameList.get(i).getUserUsername().equals(username)){
+
+        for (int i = 0; i < userList.size(); i++) {
+            if(userList.get(i).getUserUsername().equals(username)){
                 return true;
             }
         }

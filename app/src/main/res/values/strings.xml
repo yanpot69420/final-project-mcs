@@ -73,6 +73,9 @@ ALTER TABLE `transaction`
     <string name="transaction_history">Transaction History</string>
     <string name="there_is_no_data">There is No Data</string>
     <string name="home">Home</string>
-
-
+    <string name="LandingActivity">Login</string>
+    <string name="HomeActivity">Welcome to InSorma</string>
+    <string name="DetailActivity">Product Detail</string>
+    <string name="ProfileActivity">Your Profile</string>
+    <string name="HistoryActivity">Transaction History</string>
 </resources>
